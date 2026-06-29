@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Non-Veg Pickles, Vadiyalu &amp; Snacks – Anantapur Vantillu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --saffron: #E8711A;
+    --deep-red: #B5230D;
+    --turmeric: #F2A62E;
+    --cream: #FDF6EC;
+    --dark: #1A100A;
+    --muted: #7A5C44;
+    --card-bg: #FFFFFF;
+    --border: #EDE0D0;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--deep-red); font-weight: 700;
+    letter-spacing: .5px;
+    text-decoration: none;
+    background: none; border: none; cursor: pointer;
+  }
+  .nav-logo span { color: var(--saffron); }
+  .nav-links {
+    display: flex; gap: 28px; list-style: none;
+    font-size: .85rem; font-weight: 500;
+  }
+  .nav-links button {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 500;
+    text-decoration: none; color: var(--dark); transition: color .2s;
+    padding: 4px 0;
+  }
+  .nav-links button:hover, .nav-links button.active { color: var(--saffron); }
+  .nav-cart {
+    background: var(--saffron); color: #fff;
+    border: none; border-radius: 24px;
+    padding: 8px 20px; font-size: .85rem; font-weight: 600;
+    cursor: pointer; transition: background .2s, transform .15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .nav-cart:hover { background: var(--deep-red); transform: translateY(-1px); }
+  .cart-count {
+    background: #fff; color: var(--saffron);
+    border-radius: 50%; width: 18px; height: 18px;
+    font-size: .7rem; display: grid; place-items: center;
+    font-weight: 700; transition: transform .3s;
+  }
+  .cart-count.bump { transform: scale(1.5); }
+  .nav-mobile-toggle {
+    display: none;
+    background: none; border: none; font-size: 1.4rem; cursor: pointer;
+    color: var(--dark);
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, var(--deep-red) 0%, #7C1007 50%, #3D0703 100%);
+    color: #fff;
+    padding: 64px 5% 56px;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    animation: bgScroll 20s linear infinite;
+  }
+  @keyframes bgScroll { to { background-position: 60px 60px; } }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,.15); backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 20px; padding: 4px 16px;
+    font-size: .75rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 16px;
+    animation: fadeDown .6s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.2; margin-bottom: 16px;
+    animation: fadeDown .7s .1s ease both;
+  }
+  .hero h1 em { color: var(--turmeric); font-style: normal; }
+  .hero p {
+    max-width: 580px; margin: 0 auto 32px;
+    font-size: .95rem; line-height: 1.7; opacity: .85;
+    animation: fadeDown .7s .2s ease both;
+  }
+  .hero-badges {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+    animation: fadeDown .7s .3s ease both;
+  }
+  .badge {
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px; padding: 6px 16px; font-size: .78rem; font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .chilli-spice {
+    position: absolute; top: 12px; right: 8%;
+    font-size: 3rem; opacity: .18;
+    animation: float 4s ease-in-out infinite;
+  }
+  .chilli-spice2 {
+    position: absolute; bottom: 12px; left: 7%;
+    font-size: 2rem; opacity: .18;
+    animation: float 4s 1.5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-block { display: none; }
+  .section-block.active { display: block; }
+  .section-heading {
+    padding: 36px 5% 0;
+    text-align: center;
+  }
+  .section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--deep-red);
+  }
+  .section-heading p {
+    color: var(--muted); font-size: .9rem; margin-top: 6px;
+  }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    padding: 20px 5%;
+    background: #fff; border-bottom: 1px solid var(--border);
+  }
+  .filter-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 6px 18px; border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: transparent; cursor: pointer;
+    font-size: .8rem; font-weight: 500; color: var(--muted);
+    transition: all .2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--saffron); border-color: var(--saffron); color: #fff;
+  }
+  .sort-select {
+    padding: 7px 14px; border-radius: 8px;
+    border: 1.5px solid var(--border);
+    font-size: .82rem; color: var(--dark);
+    background: #fff; cursor: pointer; outline: none;
+  }
+  .product-count { font-size: .82rem; color: var(--muted); font-weight: 500; }
+
+  /* ── GRID ── */
+  .grid-section { padding: 36px 5% 60px; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s ease;
+    cursor: pointer;
+    opacity: 0; transform: translateY(24px);
+    animation: cardIn .5s ease forwards;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(181,35,13,.14);
+  }
+  @keyframes cardIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .card-img-wrap {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #FFF3E8 0%, #FFE4CC 100%);
+    height: 200px;
+  }
+  .card-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .card:hover .card-img-wrap img { transform: scale(1.1) rotate(-1deg); }
+  .card-badge {
+    position: absolute; top: 10px; left: 10px;
+    padding: 3px 10px; border-radius: 12px;
+    font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .6px;
+    z-index: 2;
+  }
+  .card-badge.bestseller { background: var(--saffron); color: #fff; }
+  .card-badge.new { background: var(--deep-red); color: #fff; }
+  .card-badge.special { background: #6B21A8; color: #fff; }
+  .wishlist-btn {
+    position: absolute; top: 10px; right: 10px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,.85); border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem;
+    opacity: 0; transform: scale(0.6);
+    transition: all .25s;
+    z-index: 2;
+  }
+  .card:hover .wishlist-btn { opacity: 1; transform: scale(1); }
+  .wishlist-btn.liked { color: var(--deep-red); }
+
+  .card-body { padding: 16px; }
+  .card-body h3 {
+    font-size: .92rem; font-weight: 600; line-height: 1.4;
+    margin-bottom: 6px; color: var(--dark);
+  }
+  .card-meta {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 10px;
+  }
+  .stars { color: var(--turmeric); font-size: .8rem; }
+  .review-count { font-size: .75rem; color: var(--muted); }
+  .spice-meter {
+    display: flex; gap: 3px; margin-bottom: 12px;
+    align-items: center;
+  }
+  .spice-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border);
+    transition: background .3s;
+  }
+  .spice-dot.hot { background: var(--deep-red); }
+  .spice-label { font-size: .7rem; color: var(--muted); margin-left: 4px; }
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+  .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--deep-red);
+  }
+  .price-from { font-size: .72rem; color: var(--muted); font-family: 'Inter', sans-serif; font-weight: 400; }
+  .add-btn {
+    background: var(--saffron); color: #fff;
+    border: none; border-radius: 24px;
+    padding: 8px 16px; font-size: .8rem; font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+    white-space: nowrap;
+  }
+  .add-btn:hover { background: var(--deep-red); transform: scale(1.04); }
+  .add-btn:active { transform: scale(0.97); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--dark); color: #fff;
+    padding: 12px 24px; border-radius: 28px;
+    font-size: .87rem; font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    display: flex; align-items: center; gap: 8px;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+    opacity: 0; z-index: 999;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); color: #C4A882;
+    padding: 48px 5% 28px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 36px; margin-bottom: 36px;
+  }
+  .footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    color: #fff; font-size: 1rem; margin-bottom: 14px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul a { color: #C4A882; text-decoration: none; font-size: .85rem; transition: color .2s; }
+  .footer-col ul a:hover { color: var(--turmeric); }
+  .footer-col p { font-size: .85rem; line-height: 1.7; }
+  .footer-bottom {
+    border-top: 1px solid #2E1E12;
+    padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+    font-size: .78rem; color: #6B4A30;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--saffron); font-size: 1.1rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-mobile-toggle { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: #fff; flex-direction: column; gap: 0;
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 8px 16px rgba(0,0,0,.06);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links button { padding: 14px 5%; width: 100%; text-align: left; }
+    .hero { padding: 44px 5% 40px; }
+    .toolbar { flex-direction: column; align-items: flex-start; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .card-img-wrap { height: 130px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <button class="nav-logo" data-section="pickles">Anantapur<span>Vantillu</span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><button data-section="pickles" class="active">Pickles</button></li>
+    <li><button data-section="vadiyalu">Vadiyalu</button></li>
+    <li><button data-section="snacks">Snacks</button></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">☰</button>
+    <button class="nav-cart" id="cartBtn">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="chilli-spice">🌶️</div>
+  <div class="chilli-spice2">🫙</div>
+  <div class="hero-tag">🍖 Authentic Andhra Style</div>
+  <h1>Non-Veg <em>Pickles</em>, Vadiyalu &amp; Snacks<br>Straight from the Godavari</h1>
+  <p>Homemade in hygienic conditions with fresh meat &amp; Godavari spices. Bold, tangy, unforgettable — just like grandma made it.</p>
+  <div class="hero-badges">
+    <span class="badge">🏠 Home Made</span>
+    <span class="badge">🌿 Fresh Ingredients</span>
+    <span class="badge">🚚 Pan India Delivery</span>
+    <span class="badge">❄️ No Preservatives</span>
+  </div>
+</section>
+
+<!-- PICKLES SECTION -->
+<div class="section-block active" id="section-pickles">
+  <div class="toolbar">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="chicken">Chicken</button>
+      <button class="filter-btn" data-filter="prawns">Prawns</button>
+      <button class="filter-btn" data-filter="mutton">Mutton</button>
+      <button class="filter-btn" data-filter="fish">Fish</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <span class="product-count" id="productCount">16 Products</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name">Name A-Z</option>
+      </select>
+    </div>
+  </div>
+  <section class="grid-section">
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+</div>
+
+<!-- VADIYALU SECTION -->
+<div class="section-block" id="section-vadiyalu">
+  <div class="section-heading">
+    <h2>Sun-Dried Vadiyalu</h2>
+    <p>Traditional Andhra fryums, made the old way and dried under the open sun</p>
+  </div>
+  <section class="grid-section">
+    <div class="products-grid" id="vadiyaluGrid"></div>
+  </section>
+</div>
+
+<!-- SNACKS SECTION -->
+<div class="section-block" id="section-snacks">
+  <div class="section-heading">
+    <h2>Tea-Time Snacks</h2>
+    <p>Crunchy, savory bites perfect with evening chai</p>
+  </div>
+  <section class="grid-section">
+    <div class="products-grid" id="snacksGrid"></div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Anantapur Vantillu</h4>
+      <p>Specialized food delivery for Godavari delicacies — Pickles, Vadiyalu, Snacks &amp; more.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#">Return &amp; Refund Policy</a></li>
+        <li><a href="#">Delivery Policy</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Our Location</h4>
+      <p>Plot No.98 &amp; 105, Kalyan Nagar,<br>Ameerpet, S.R Nagar,<br>Hyderabad, Telangana 500038</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p>📞 080-62179046<br>Mon–Sat: 9 AM – 12 PM<br><br>📧 support@Anantapurvantillu.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-brand">Anantapur Vantillu</span>
+    <span>© 2026 All rights reserved</span>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ <span id="toastMsg">Added to cart!</span></div>
+
+<script>
+  const products = [
+    { id:1, name:"Andhra Style Spicy Prawns Pickle", sub:"Bhimavaram Special Royyala Avakaya", category:"prawns", price:425, spice:5, badge:"bestseller", img:"https://www.godavarivantillu.com/cdn/shop/products/PrawnsPickle_480x.jpg?v=1627597545", rating:4.8, reviews:124 },
+    { id:2, name:"Boneless Chicken Pickle", sub:"Godavari Style", category:"chicken", price:375, spice:4, badge:"bestseller", img:"https://www.godavarivantillu.com/cdn/shop/products/BonelessChickenPickle_480x.jpg?v=1627596545", rating:4.7, reviews:98 },
+    { id:3, name:"Chicken Pickle With Bone", sub:"Authentic Andhra Style", category:"chicken", price:325, spice:4, badge:null, img:"https://tulasipickles.com/wp-content/uploads/2024/11/Chicken-Bone.jpg", rating:4.6, reviews:76 },
+    { id:4, name:"Gongura Prawns Pickle", sub:"Andhra Style", category:"prawns", price:425, spice:5, badge:"special", img:"https://pushmycart.in/cdn/shop/files/GONGURA-PRAWNS-PICKLE_d6cbd9f3-e6ae-4d66-b19c-ed48b6de53e7.jpg?v=1726814865&width=600", rating:4.9, reviews:157 },
+    { id:5, name:"Mutton Pickle Boneless", sub:"Authentic Andhra Style", category:"mutton", price:500, spice:5, badge:"bestseller", img:"https://d1311wbk6unapo.cloudfront.net/NushopCatalogue/tr:f-webp,w-1200,fo-auto/6953ca376c33c17b98295197/cat_img/_Ve2_9gb_12L2GKGUR7_2026-01-23_1.png", rating:4.8, reviews:89 },
+    { id:6, name:"Prawn Biryani Pickle", sub:"Godavari Special", category:"prawns", price:425, spice:4, badge:"new", img:"https://m.media-amazon.com/images/I/71JheojeF8L._SX679_.jpg", rating:4.7, reviews:43 },
+    { id:7, name:"Gongura Boneless Chicken Pickle", sub:"Andhra Style", category:"chicken", price:400, spice:4, badge:"new", img:"https://raagarasafoods.com/cdn/shop/files/AndhraGongura-chicken-pickle.png?v=1776329285&width=823", rating:4.6, reviews:62 },
+    { id:8, name:"Korameenu Fish Pickle", sub:"River Fish Special", category:"fish", price:450, spice:5, badge:"special", img:"https://www.godavarivantillu.com/cdn/shop/products/KoramenuPickle_b5e6d72b-7d30-4278-88e8-b4c2423657d0_480x.jpg?v=1627598217", rating:4.9, reviews:201 },
+    { id:9, name:"Chicken Biryani Pickle Boneless", sub:"Aromatic Biryani Blend", category:"chicken", price:400, spice:3, badge:null, img:"https://andhrasfood.com/cdn/shop/files/WhatsApp_Image_2025-03-15_at_5.17.24_PM.jpg?v=1742039709&width=713", rating:4.5, reviews:55 },
+    { id:10, name:"Andhra Fish Pickle", sub:"Traditional Recipe", category:"fish", price:350, spice:4, badge:null, img:"https://www.yummytummyaarthi.com/wp-content/uploads/2024/02/fish-pickle-1.jpeg", rating:4.4, reviews:88 },
+    { id:11, name:"Gongura Mutton Boneless Pickle", sub:"Andhra Style Sorrel Mutton", category:"mutton", price:625, spice:5, badge:"special", img:"https://5.imimg.com/data5/SELLER/Default/2024/6/424821324/ZQ/NF/RD/18246623/t1-1000x1000.jpeg", rating:4.9, reviews:134 },
+    { id:12, name:"Natu Kodi Pickle with Bone", sub:"Country Chicken Andhra Style", category:"chicken", price:400, spice:4, badge:null, img:"https://m.media-amazon.com/images/I/71KnwPclxBL._SX679_.jpg", rating:4.7, reviews:71 },
+    { id:13, name:"Boneless Fish Pickle", sub:"Premium Cuts", category:"fish", price:400, spice:3, badge:"new", img:"https://jeerapeppers.com/wp-content/uploads/2022/11/GODAVARI-FISH-PICKLE.jpg", rating:4.6, reviews:47 },
+    { id:14, name:"Mutton Keema Pickle", sub:"Authentic Andhra Style", category:"mutton", price:625, spice:5, badge:"bestseller", img:"https://i.ytimg.com/vi/c-T16rLzr8Q/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgVyhLMA8=&rs=AOn4CLDdHWh8-_NYxkcaUsadoSZOVWjB6g", rating:4.8, reviews:112 },
+    { id:15, name:"Mutton Biryani Pickle Boneless", sub:"Rich Biryani Masala", category:"mutton", price:540, spice:4, badge:"new", img:"data:image/jpeg;base64,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", rating:4.7, reviews:38 },
+    { id:16, name:"Ulavacharu", sub:"Traditional Horsegram Soup 250g", category:"fish", price:150, spice:2, badge:null, img:"data:image/jpeg;base64,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", rating:4.5, reviews:92 },
+  ];
+
+  const vadiyaluProducts = [
+    { id:101, name:"Minapa Vadiyalu", sub:"Sun-Dried Urad Dal Badi", price:180, img:"https://i0.wp.com/www.sailusfood.com/wp-content/uploads/2013/04/minapa-vadiyalu.jpg" },
+    { id:102, name:"Aviri Vadiyalu", sub:"Steamed Rice Papad, Sun-Dried", price:160, img:"https://www.vegrecipesofindia.com/wp-content/uploads/2015/04/aviri-vadiyalu-1.jpg" },
+    { id:103, name:"Saggubiyyam Vadiyalu", sub:"Sago / Tapioca Pearl Crisps", price:200, img:"https://myspicykitchen.net/wp-content/uploads/2014/05/saggubiyyam-vadiyalu.jpg" },
+    { id:104, name:"Pesara Vadiyalu", sub:"Moong Dal Sun-Dried Fryums", price:170, img:"https://aahaaramonline.com/wp-content/uploads/2015/06/pesara-vadiyalu.jpg" },
+  ];
+
+  const snacksProducts = [
+    { id:201, name:"Chekkalu", sub:"Crispy Rice Flour Tea-Time Snack", price:140, img:"https://www.swasthi.com/wp-content/uploads/2021/12/chekkalu-recipe.jpg" },
+    { id:202, name:"Kara Boondi", sub:"Spicy Gram Flour Mixture", price:130, img:"https://www.sitarafoods.com/wp-content/uploads/2021/05/karam-boondi.jpg" },
+    { id:203, name:"Andhra Murukku", sub:"Crispy Spiral Tea-Time Snack", price:150, img:"https://www.swasthi.com/wp-content/uploads/2019/02/murukku-recipe.jpg" },
+    { id:204, name:"Mixture", sub:"Classic Andhra Style Namkeen Mix", price:160, img:"https://www.sitarafoods.com/wp-content/uploads/2021/05/karam-boondi.jpg" },
+  ];
+
+  let cartCount = 0;
+  let activeFilter = "all";
+  let sortMode = "featured";
+  let liked = new Set();
+
+  function spiceLabel(n) {
+    if (n <= 2) return "Mild";
+    if (n <= 3) return "Medium";
+    if (n <= 4) return "Spicy";
+    return "Fiery";
+  }
+
+  function renderCard(p, delay) {
+    return `
+    <div class="card" data-id="${p.id}" data-category="${p.category}" style="animation-delay:${delay}ms">
+      <div class="card-img-wrap">
+        ${p.badge ? `<span class="card-badge ${p.badge}">${p.badge === 'bestseller' ? '⭐ Best Seller' : p.badge === 'new' ? '🆕 New' : '✨ Special'}</span>` : ''}
+        <button class="wishlist-btn ${liked.has(p.id)?'liked':''}" data-wish="${p.id}" title="Wishlist">
+          ${liked.has(p.id) ? '❤️' : '🤍'}
+        </button>
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop'">
+      </div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <div class="card-meta">
+          <span class="stars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span>
+          <span class="review-count">(${p.reviews})</span>
+        </div>
+        <div class="spice-meter">
+          ${[1,2,3,4,5].map(i=>`<div class="spice-dot ${i<=p.spice?'hot':''}"></div>`).join('')}
+          <span class="spice-label">${spiceLabel(p.spice)}</span>
+        </div>
+        <div class="card-footer">
+          <div>
+            <div class="price-from">From</div>
+            <div class="price">₹${p.price}</div>
+          </div>
+          <button class="add-btn" data-product="${p.id}">Add to Cart</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderSimpleCard(p, delay) {
+    return `
+    <div class="card" data-id="${p.id}" style="animation-delay:${delay}ms">
+      <div class="card-img-wrap">
+        <button class="wishlist-btn ${liked.has(p.id)?'liked':''}" data-wish="${p.id}" title="Wishlist">
+          ${liked.has(p.id) ? '❤️' : '🤍'}
+        </button>
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop'">
+      </div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:12px;">${p.sub}</p>
+        <div class="card-footer">
+          <div>
+            <div class="price-from">From</div>
+            <div class="price">₹${p.price}</div>
+          </div>
+          <button class="add-btn" data-product="${p.id}">Add to Cart</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function getFiltered() {
+    let list = activeFilter === "all" ? [...products] : products.filter(p => p.category === activeFilter);
+    if (sortMode === "price-asc") list.sort((a,b) => a.price - b.price);
+    else if (sortMode === "price-desc") list.sort((a,b) => b.price - a.price);
+    else if (sortMode === "name") list.sort((a,b) => a.name.localeCompare(b.name));
+    return list;
+  }
+
+  function renderGrid() {
+    const list = getFiltered();
+    document.getElementById("productCount").textContent = `${list.length} Product${list.length !== 1 ? 's':''}`;
+    document.getElementById("productsGrid").innerHTML = list.map((p,i) => renderCard(p, i * 60)).join('');
+    document.getElementById("vadiyaluGrid").innerHTML = vadiyaluProducts.map((p,i) => renderSimpleCard(p, i * 60)).join('');
+    document.getElementById("snacksGrid").innerHTML = snacksProducts.map((p,i) => renderSimpleCard(p, i * 60)).join('');
+    attachEvents();
+  }
+
+  function attachEvents() {
+    document.querySelectorAll(".add-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = +btn.dataset.product;
+        const p = [...products, ...vadiyaluProducts, ...snacksProducts].find(x => x.id === id);
+        cartCount++;
+        const el = document.getElementById("cartCount");
+        el.textContent = cartCount;
+        el.classList.add("bump");
+        setTimeout(() => el.classList.remove("bump"), 350);
+        showToast(`"${p.name}" added to cart!`);
+        btn.textContent = "✓ Added";
+        btn.style.background = "#166534";
+        setTimeout(() => { btn.textContent = "Add to Cart"; btn.style.background = ""; }, 1500);
+      });
+    });
+    document.querySelectorAll(".wishlist-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const id = +btn.dataset.wish;
+        if (liked.has(id)) { liked.delete(id); btn.textContent = "🤍"; btn.classList.remove("liked"); }
+        else { liked.add(id); btn.textContent = "❤️"; btn.classList.add("liked"); }
+      });
+    });
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById("toast");
+    document.getElementById("toastMsg").textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => toast.classList.remove("show"), 2800);
+  }
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeFilter = btn.dataset.filter;
+      renderGrid();
+    });
+  });
+
+  document.getElementById("sortSelect").addEventListener("change", (e) => {
+    sortMode = e.target.value;
+    renderGrid();
+  });
+
+  // ── NAV: section switching ──
+  function showSection(name) {
+    document.querySelectorAll(".section-block").forEach(s => s.classList.remove("active"));
+    document.getElementById("section-" + name).classList.add("active");
+    document.querySelectorAll(".nav-links button").forEach(b => {
+      b.classList.toggle("active", b.dataset.section === name);
+    });
+    window.scrollTo({ top: document.querySelector(".hero").offsetHeight + 64, behavior: "smooth" });
+    document.getElementById("navLinks").classList.remove("open");
+  }
+
+  document.querySelectorAll(".nav-links button, .nav-logo").forEach(btn => {
+    btn.addEventListener("click", () => showSection(btn.dataset.section));
+  });
+
+  document.getElementById("navToggle").addEventListener("click", () => {
+    document.getElementById("navLinks").classList.toggle("open");
+  });
+
+  document.getElementById("cartBtn").addEventListener("click", () => {
+    showToast(cartCount === 0 ? "Your cart is empty" : `You have ${cartCount} item${cartCount>1?'s':''} in your cart`);
+  });
+
+  renderGrid();
+</script>
+</body>
+</html>   
